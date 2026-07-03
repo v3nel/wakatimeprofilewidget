@@ -7,7 +7,7 @@ mod types;
 
 use crate::config::Config;
 use crate::error::AppResult;
-use crate::provider::discord::push_to_widget;
+use crate::provider::discord::{WidgetData, push_to_widget};
 use crate::provider::github::get_total_lines_written;
 use crate::provider::wakatime::{
     get_code_time_last_7_days, get_last_7_days_stats, get_total_code_time,
@@ -34,13 +34,15 @@ async fn main() -> AppResult<()> {
 
     push_to_widget(
         &state,
-        code_time_total,
-        code_time_7_days,
-        total_lines,
-        ai,
-        human,
-        fav_editor,
-        fav_language,
+        WidgetData {
+            code_time_total,
+            code_time_7_days,
+            total_lines,
+            ai,
+            human,
+            fav_editor,
+            fav_language,
+        },
     )
     .await?;
     Ok(())

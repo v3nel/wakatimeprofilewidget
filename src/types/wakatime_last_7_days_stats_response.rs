@@ -11,7 +11,6 @@ pub struct WakatimeLast7DaysStatsData {
     pub human_deletions: u64,
     pub editors: Vec<Editors>,
     pub languages: Vec<Languages>,
-    
 }
 
 #[derive(serde::Deserialize)]

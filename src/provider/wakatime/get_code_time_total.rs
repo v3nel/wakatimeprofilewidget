@@ -1,17 +1,15 @@
-use crate::{AppResult, AppState, scripts::format_digital_coding_time, types::WakatimeAllTimeStatsResponse};
+use crate::{
+    AppResult, AppState, scripts::format_digital_coding_time, types::WakatimeAllTimeStatsResponse,
+};
 
-pub async fn get_total_code_time(
-    state: &AppState,
-) -> AppResult<String> {
+pub async fn get_total_code_time(state: &AppState) -> AppResult<String> {
     let wakatime_total_code_time = request_total_code_time(state).await?.data.digital;
     let formated = format_digital_coding_time(wakatime_total_code_time);
-    
+
     Ok(formated)
 }
 
-async fn request_total_code_time(
-    state: &AppState,
-) -> AppResult<WakatimeAllTimeStatsResponse> {
+async fn request_total_code_time(state: &AppState) -> AppResult<WakatimeAllTimeStatsResponse> {
     let base64apikey = &state.config.wakatime_api_key;
     let response = state
         .http
